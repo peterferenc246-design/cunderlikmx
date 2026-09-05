@@ -1,0 +1,40 @@
+name: Import Cunderlik gallery images
+
+on:
+  push:
+    paths:
+      - '.github/workflows/import-cunderlik-gallery.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import-images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download original gallery images from WDFOX
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public/images/cunderlik-gallery
+          curl -fL 'https://raw.githubusercontent.com/peterferenc246-design/WDFOX/main/public/images/cunderlik-gallery/%C4%8Cunderl%C3%ADk2.jpg' -o 'public/images/cunderlik-gallery/Čunderlík2.jpg'
+          curl -fL 'https://raw.githubusercontent.com/peterferenc246-design/WDFOX/main/public/images/cunderlik-gallery/%C4%8Cunderl%C3%ADk3.jpg' -o 'public/images/cunderlik-gallery/Čunderlík3.jpg'
+          curl -fL 'https://raw.githubusercontent.com/peterferenc246-design/WDFOX/main/public/images/cunderlik-gallery/%C4%8Cunderl%C3%ADk4.jpg' -o 'public/images/cunderlik-gallery/Čunderlík4.jpg'
+          curl -fL 'https://raw.githubusercontent.com/peterferenc246-design/WDFOX/main/public/images/cunderlik-gallery/%C4%8Cunderl%C3%ADk5.jpg' -o 'public/images/cunderlik-gallery/Čunderlík5.jpg'
+
+      - name: Commit imported images
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/images/cunderlik-gallery/Čunderlík2.jpg public/images/cunderlik-gallery/Čunderlík3.jpg public/images/cunderlik-gallery/Čunderlík4.jpg public/images/cunderlik-gallery/Čunderlík5.jpg
+          if git diff --cached --quiet; then
+            echo 'Images already present.'
+            exit 0
+          fi
+          git commit -m 'Import original Cunderlik gallery images'
+          git push
