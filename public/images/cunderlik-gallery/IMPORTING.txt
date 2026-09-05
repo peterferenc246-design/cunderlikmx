@@ -1,0 +1,1 @@
+Automaticky importujem originalne obrazky z povodneho WDFOX umiestnenia. Tento pomocny subor moze byt po importe odstraneny.
