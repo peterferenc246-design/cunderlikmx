@@ -16,6 +16,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Sync branch
+        shell: bash
+        run: git pull --ff-only origin main
+
       - name: Download original gallery images from WDFOX
         shell: bash
         run: |
@@ -37,4 +41,4 @@ jobs:
             exit 0
           fi
           git commit -m 'Import original Cunderlik gallery images'
-          git push
+          git push origin main
