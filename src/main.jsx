@@ -16,9 +16,9 @@ const copy = {
     campItems: [["Víkendový MX kemp", "Pre deti, juniorov aj hobby jazdcov. Tréning, servisné rady a pohodová partia."], ["Slovensko", "Termíny pri slovenských tratiach — ideálne na prvé kempy a pravidelné tréningy."], ["Taliansko", "Budúce kempy pod talianskym slnkom s jazdením, cestovaním a MX atmosférou."]],
     aboutTitle: "Emil Čunderlík", aboutText: "Aktívny veteránsky jazdec, ktorý chce odovzdávať skúsenosti ďalšej generácii. Bez veľkých rečí — priamo na trati, zrozumiteľne a s rešpektom k jazdcovi aj motocyklu.",
     quote: "Motokros je škola odvahy, trpezlivosti a rešpektu. Najlepšie sa jazdí v dobrej partii.",
-    contactTitle: "Pridaj sa na trať", contactText: "Napíš, čo potrebuješ — tréning alebo kemp, predaj nového či jazdeného motocykla, nákup starého motocykla, servis, diely alebo požičovňu. Pri tréningu uveď vek, skúsenosti, motocykel a krajinu.",
+    contactTitle: "Pridaj sa na trať", contactText: "Napíš, čo potrebuješ — tréning alebo kemp, predaj a nákup starých a nových motocyklov, servis, diely alebo požičovňu. Pri tréningu uveď vek, skúsenosti, motocykel a krajinu.",
     name: "Meno a priezvisko", email: "E-mail alebo telefón", message: "O čo máš záujem? Tréning, motocykel, servis, diely alebo požičovňa?", send: "Poslať nezáväzný dopyt", success: "Ďakujeme! Dopyt je pripravený — pre pripojenie odosielania doplň e-mailový formulár.",
-    seeYou: "VIDÍME SA NA TRATI!", sign: ["TRÉNINGY", "KEMPY", "SKÚSENOSTI", "MOTOCYKEL", "PREDAJ NOVÝCH", "PREDAJ JAZDENÝCH", "NÁKUP STARÝCH", "SERVIS", "DIELY", "POŽIČOVŇA", "KRAJINA"],
+    seeYou: "VIDÍME SA NA TRATI!", sign: ["TRÉNINGY", "KEMPY", "SKÚSENOSTI", "MOTOCYKEL", "PREDAJ A NÁKUP", "STARÝCH A NOVÝCH", "MOTOCYKLOV", "SERVIS", "DIELY", "POŽIČOVŇA", "KRAJINA"],
     footer: "Cunderlik MX Academy · Motokrosová škola, kempy a komunita"
   },
   it: {
@@ -34,9 +34,9 @@ const copy = {
     campItems: [["Camp MX weekend", "Per bambini, junior e piloti hobby. Allenamento, consigli di assistenza e ottima compagnia."], ["Slovacchia", "Date sulle piste slovacche — perfette per i primi camp e allenamenti regolari."], ["Italia", "Futuri camp sotto il sole italiano con guida, viaggio e atmosfera MX."]],
     aboutTitle: "Emil Čunderlík", aboutText: "Pilota veterano attivo che desidera trasmettere la propria esperienza alla prossima generazione. Direttamente in pista, in modo chiaro e con rispetto per pilota e moto.",
     quote: "Il motocross insegna coraggio, pazienza e rispetto. Si guida meglio in una buona squadra.",
-    contactTitle: "Unisciti in pista", contactText: "Scrivi cosa ti serve — allenamento o camp, vendita di moto nuove o usate, acquisto di moto vecchie, assistenza, ricambi o noleggio. Per l'allenamento indica età, esperienza, moto e Paese.",
+    contactTitle: "Unisciti in pista", contactText: "Scrivi cosa ti serve — allenamento o camp, vendita e acquisto di moto nuove e usate, assistenza, ricambi o noleggio. Per l'allenamento indica età, esperienza, moto e Paese.",
     name: "Nome e cognome", email: "E-mail o telefono", message: "Cosa ti interessa? Allenamento, moto, assistenza, ricambi o noleggio?", send: "Invia richiesta", success: "Grazie! La richiesta è pronta — collega un servizio e-mail per l'invio.",
-    seeYou: "CI VEDIAMO IN PISTA!", sign: ["ALLENAMENTI", "CAMP", "ESPERIENZA", "MOTOCICLO", "MOTO NUOVE", "MOTO USATE", "ACQUISTO USATO", "ASSISTENZA", "RICAMBI", "NOLEGGIO", "PAESE"],
+    seeYou: "CI VEDIAMO IN PISTA!", sign: ["ALLENAMENTI", "CAMP", "ESPERIENZA", "MOTOCICLO", "VENDITA E ACQUISTO", "MOTO NUOVE E USATE", "ASSISTENZA", "RICAMBI", "NOLEGGIO", "PAESE"],
     footer: "Cunderlik MX Academy · Scuola motocross, camp e comunità"
   }
 };
