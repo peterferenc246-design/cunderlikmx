@@ -18,6 +18,7 @@ const copy = {
     quote: "Motokros je škola odvahy, trpezlivosti a rešpektu. Najlepšie sa jazdí v dobrej partii.",
     contactTitle: "Pridaj sa na trať", contactText: "Napíš, pre koho je tréning alebo kemp — vek, skúsenosti, motorka a krajina. Ozveme sa s vhodným termínom.",
     name: "Meno a priezvisko", email: "E-mail alebo telefón", message: "Pre koho je tréning a akú máš skúsenosť?", send: "Poslať nezáväzný dopyt", success: "Ďakujeme! Dopyt je pripravený — pre pripojenie odosielania doplň e-mailový formulár.",
+    seeYou: "VIDÍME SA NA TRATI!", sign: ["TRÉNINGY", "KEMPY", "SKÚSENOSTI", "MOTORKA", "KRAJINA"],
     footer: "Cunderlik MX Academy · Motokrosová škola, kempy a komunita"
   },
   it: {
@@ -35,6 +36,7 @@ const copy = {
     quote: "Il motocross insegna coraggio, pazienza e rispetto. Si guida meglio in una buona squadra.",
     contactTitle: "Unisciti in pista", contactText: "Scrivi per chi è l'allenamento o il camp — età, esperienza, moto e Paese. Ti risponderemo con una data adatta.",
     name: "Nome e cognome", email: "E-mail o telefono", message: "Per chi è l'allenamento e qual è la tua esperienza?", send: "Invia richiesta", success: "Grazie! La richiesta è pronta — collega un servizio e-mail per l'invio.",
+    seeYou: "CI VEDIAMO IN PISTA!", sign: ["ALLENAMENTI", "CAMP", "ESPERIENZA", "MOTO", "PAESE"],
     footer: "Cunderlik MX Academy · Scuola motocross, camp e comunità"
   }
 };
@@ -47,5 +49,5 @@ function App(){
  <section id="school" className="section"><p className="kicker">MX ACADEMY</p><h2>{t.schoolTitle}</h2><p className="sectionLead">{t.schoolText}</p><div className="cards">{t.cards.map(([a,b],i)=><article className="card" key={a}><span>0{i+1}</span><h3>{a}</h3><p>{b}</p></article>)}</div></section>
  <section id="camps" className="section dark"><p className="kicker">MX CAMPS</p><h2>{t.campTitle}</h2><p className="sectionLead">{t.campText}</p><div className="campGrid">{t.campItems.map(([a,b],i)=><article key={a}><div className={'campPhoto p'+i}>✦</div><h3>{a}</h3><p>{b}</p><a href="#contact">{t.primary} →</a></article>)}</div></section>
  <section id="about" className="about"><div className="portrait"><div>EMIL<br/><small>ČUNDERLÍK</small></div></div><div><p className="kicker">VETERAN RIDER · MENTOR</p><h2>{t.aboutTitle}</h2><p>{t.aboutText}</p><blockquote>“{t.quote}”</blockquote></div></section>
- <section id="contact" className="contact"><p className="kicker">KONTAKT / CONTATTI</p><h2>{t.contactTitle}</h2><p>{t.contactText}</p><form onSubmit={e=>{e.preventDefault();setSent(true)}}><input required placeholder={t.name}/><input required placeholder={t.email}/><textarea required placeholder={t.message}></textarea><button className="btn primary">{t.send} <b>→</b></button></form>{sent&&<p className="success">{t.success}</p>}</section></main><footer><span>{t.footer}</span><span>© {new Date().getFullYear()} Cunderlik MX</span></footer></>}
+ <section id="contact" className="contact"><div className="contactGrid"><div className="contactForm"><p className="kicker">KONTAKT / CONTATTI</p><h2>{t.contactTitle}</h2><p>{t.contactText}</p><form onSubmit={e=>{e.preventDefault();setSent(true)}}><input required placeholder={t.name}/><input required placeholder={t.email}/><textarea required placeholder={t.message}></textarea><button className="btn primary">{t.send} <b>→</b></button></form>{sent&&<p className="success">{t.success}</p>}</div><div className="contactVisual"><div className="emailBubble"><strong>Emil Cunderlik</strong><a href="mailto:emil.cunderlik@gmail.com">✉ emil.cunderlik@gmail.com</a></div><div className="seeYou">{t.seeYou}</div><img src="/images/cunderlik-gallery/%C4%8Cunderl%C3%ADk6.png" alt="Emil Čunderlík na červenej motocykli Jawa"/><div className="trackSigns">{t.sign.map(x=><span key={x}>{x}</span>)}</div></div></div></section></main><footer><span>{t.footer}</span><span>© {new Date().getFullYear()} Cunderlik MX</span></footer></>}
 createRoot(document.getElementById("root")).render(<App/>);
