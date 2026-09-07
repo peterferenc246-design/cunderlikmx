@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import "./styles.css";
 
@@ -42,6 +42,7 @@ const copy = {
 };
 function App(){
  const [lang,setLang]=useState("sk"), [sent,setSent]=useState(false); const t=copy[lang];
+ useEffect(()=>{ if(window.location.hash){ window.history.replaceState(null,"",window.location.pathname+window.location.search); } window.scrollTo(0,0); },[]);
  const links=["home","school","camps","about","contact"];
  return <><header><a className="brand" href="#home">CUNDERLIK <i>MX</i><small>ACADEMY</small></a><nav>{t.nav.map((x,i)=><a key={x} href={'#'+links[i]}>{x}</a>)}</nav><div className="lang"><button className={lang==='sk'?'active':''} onClick={()=>setLang('sk')}>SK</button><span>/</span><button className={lang==='it'?'active':''} onClick={()=>setLang('it')}>IT</button></div></header>
  <main id="home"><section className="hero"><div className="grid"></div><div className="heroContent"><p className="eyebrow">{t.eyebrow}</p><h1>{t.title}</h1><p className="lead">{t.intro}</p><div className="actions"><a className="btn primary" href="#contact">{t.primary} <b>→</b></a><a className="btn ghost" href="#camps">{t.secondary}</a></div></div><div className="bike" aria-hidden="true">MX</div></section>
