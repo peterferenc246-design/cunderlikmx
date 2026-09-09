@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import "./styles.css";
 
-const CF_WORKER = "https://fia-fox-web-stripe.peter-ferenc246.workers.dev";
-
 const copy = {
   sk: {
     nav: ["Domov", "Škola", "Kempy", "O Emilovi", "Kontakt"],
@@ -19,7 +17,7 @@ const copy = {
     aboutTitle: "Emil Čunderlík", aboutText: "Aktívny veteránsky jazdec, ktorý chce odovzdávať skúsenosti ďalšej generácii. Bez veľkých rečí — priamo na trati, zrozumiteľne a s rešpektom k jazdcovi aj motocyklu.",
     quote: "Motokros je škola odvahy, trpezlivosti a rešpektu. Najlepšie sa jazdí v dobrej partii.",
     contactTitle: "Pridaj sa na trať", contactText: "Napíš, čo potrebuješ — tréning alebo kemp, predaj a nákup starých a nových motocyklov, servis, diely alebo požičovňu. Pri tréningu uveď vek, skúsenosti, motocykel a krajinu.",
-    name: "Meno a priezvisko", email: "E-mail", message: "O čo máš záujem? Tréning, motocykel, servis, diely alebo požičovňa?", send: "Poslať nezáväzný dopyt", sending: "Odosielam...", success: "Ďakujeme! Správa bola odoslaná na info@foxprof.club.", error: "Správu sa nepodarilo odoslať. Skúste to prosím neskôr.", short: "Zadajte platné meno, e-mail a správu aspoň 5 znakov.",
+    name: "Meno a priezvisko", email: "E-mail alebo telefón", message: "O čo máš záujem? Tréning, motocykel, servis, diely alebo požičovňa?", send: "Poslať nezáväzný dopyt", success: "Ďakujeme! Dopyt je pripravený — pre pripojenie odosielania doplň e-mailový formulár.",
     seeYou: "VIDÍME SA NA TRATI!", sign: ["TRÉNINGY", "KEMPY", "SKÚSENOSTI", "MOTOCYKEL", "PREDAJ A NÁKUP", "STARÝCH A NOVÝCH", "MOTOCYKLOV", "SERVIS", "DIELY", "POŽIČOVŇA", "KRAJINA"],
     footer: "Cunderlik MX Academy · Motokrosová škola, kempy a komunita"
   },
@@ -37,43 +35,20 @@ const copy = {
     aboutTitle: "Emil Čunderlík", aboutText: "Pilota veterano attivo che desidera trasmettere la propria esperienza alla prossima generazione. Direttamente in pista, in modo chiaro e con rispetto per pilota e moto.",
     quote: "Il motocross insegna coraggio, pazienza e rispetto. Si guida meglio in una buona squadra.",
     contactTitle: "Unisciti in pista", contactText: "Scrivi cosa ti serve — allenamento o camp, vendita e acquisto di moto nuove e usate, assistenza, ricambi o noleggio. Per l'allenamento indica età, esperienza, moto e Paese.",
-    name: "Nome e cognome", email: "E-mail", message: "Cosa ti interessa? Allenamento, moto, assistenza, ricambi o noleggio?", send: "Invia richiesta", sending: "Invio...", success: "Grazie! Il messaggio è stato inviato a info@foxprof.club.", error: "Errore nell'invio. Riprova più tardi.", short: "Inserisci un nome valido, un'e-mail e un messaggio di almeno 5 caratteri.",
+    name: "Nome e cognome", email: "E-mail o telefono", message: "Cosa ti interessa? Allenamento, moto, assistenza, ricambi o noleggio?", send: "Invia richiesta", success: "Grazie! La richiesta è pronta — collega un servizio e-mail per l'invio.",
     seeYou: "CI VEDIAMO IN PISTA!", sign: ["ALLENAMENTI", "CAMP", "ESPERIENZA", "MOTOCICLO", "VENDITA E ACQUISTO", "MOTO NUOVE E USATE", "ASSISTENZA", "RICAMBI", "NOLEGGIO", "PAESE"],
     footer: "Cunderlik MX Academy · Scuola motocross, camp e comunità"
   }
 };
-
 function App(){
- const [lang,setLang]=useState("sk");
- const [status,setStatus]=useState("idle");
- const t=copy[lang];
+ const [lang,setLang]=useState("sk"), [sent,setSent]=useState(false); const t=copy[lang];
  useEffect(()=>{ if(window.location.hash){ window.history.replaceState(null,"",window.location.pathname+window.location.search); } window.scrollTo(0,0); },[]);
  const links=["home","school","camps","about","contact"];
- const handleSubmit=async(e)=>{
-   e.preventDefault();
-   const form=e.currentTarget;
-   const name=form.elements.name.value.trim();
-   const email=form.elements.email.value.trim();
-   const message=form.elements.message.value.trim();
-   if(!name || !email || message.length<5){ setStatus("short"); return; }
-   setStatus("sending");
-   try{
-     const r=await fetch(CF_WORKER+"/contact",{
-       method:"POST",
-       headers:{"Content-Type":"application/json"},
-       body:JSON.stringify({name,email,message,lang,ts:Date.now(),source:"cunderlikmx"})
-     });
-     const data=await r.json().catch(()=>({}));
-     if(r.ok && data.ok){ setStatus("success"); form.reset(); }
-     else if(r.status===400){ setStatus("short"); }
-     else{ setStatus("error"); }
-   }catch(err){ setStatus("error"); }
- };
  return <><header><a className="brand" href="#home">CUNDERLIK <i>MX</i><small>ACADEMY</small></a><nav>{t.nav.map((x,i)=><a key={x} href={'#'+links[i]}>{x}</a>)}</nav><div className="lang"><button className={lang==='sk'?'active':''} onClick={()=>setLang('sk')}>SK</button><span>/</span><button className={lang==='it'?'active':''} onClick={()=>setLang('it')}>IT</button></div></header>
  <main id="home"><section className="hero"><div className="grid"></div><div className="heroContent"><p className="eyebrow">{t.eyebrow}</p><h1>{t.title}</h1><p className="lead">{t.intro}</p><div className="actions"><a className="btn primary" href="#contact">{t.primary} <b>→</b></a><a className="btn ghost" href="#camps">{t.secondary}</a></div></div><div className="bike" aria-hidden="true">MX</div></section>
  <section className="stats">{t.stats.map(([a,b])=><div key={a}><strong>{a}</strong><span>{b}</span></div>)}</section>
  <section id="school" className="section"><p className="kicker">MX ACADEMY</p><h2>{t.schoolTitle}</h2><p className="sectionLead">{t.schoolText}</p><div className="cards">{t.cards.map(([a,b],i)=><article className="card" key={a}><span>0{i+1}</span><h3>{a}</h3><p>{b}</p></article>)}</div></section>
  <section id="camps" className="section dark"><p className="kicker">MX CAMPS</p><h2>{t.campTitle}</h2><p className="sectionLead">{t.campText}</p><div className="campGrid">{t.campItems.map(([a,b],i)=><article key={a}><div className={'campPhoto p'+i}>✦</div><h3>{a}</h3><p>{b}</p><a href="#contact">{t.primary} →</a></article>)}</div></section>
  <section id="about" className="about"><div className="portrait"><div>EMIL<br/><small>ČUNDERLÍK</small></div></div><div><p className="kicker">VETERAN RIDER · MENTOR</p><h2>{t.aboutTitle}</h2><p>{t.aboutText}</p><blockquote>“{t.quote}”</blockquote></div></section>
- <section id="contact" className="contact"><div className="contactGrid"><div className="contactForm"><p className="kicker">KONTAKT / CONTATTI</p><h2>{t.contactTitle}</h2><p>{t.contactText}</p><form onSubmit={handleSubmit}><input name="name" required placeholder={t.name}/><input name="email" type="email" required placeholder={t.email}/><textarea name="message" required minLength="5" placeholder={t.message}></textarea><button className="btn primary" disabled={status==="sending"}>{status==="sending"?t.sending:t.send} <b>→</b></button></form>{status==="success"&&<p className="success">{t.success}</p>}{status==="error"&&<p className="success">{t.error}</p>}{status==="short"&&<p className="success">{t.short}</p>}</div><div className="contactVisual"><div className="emailBubble"><strong>Emil Čunderlík</strong><a href="mailto:emil.cunderlik@gmail.com">✉ emil.cunderlik@gmail.com</a></div><div className="seeYou">{t.seeYou}</div><img src="/images/cunderlik-gallery/%C4%8Cunderl%C3%ADk6.png" alt="Emil Čunderlík na červenom motocykli Jawa"/><div className="trackSigns">{t.sign.map(x=><span key={x}>{x}</span>)}</div></div></div></section></main><footer><span>{t.footer}</span><span>© {new Date().getFullYear()} Cunderlik MX</span></footer></>}
+ <section id="contact" className="contact"><div className="contactGrid"><div className="contactForm"><p className="kicker">KONTAKT / CONTATTI</p><h2>{t.contactTitle}</h2><p>{t.contactText}</p><form onSubmit={e=>{e.preventDefault();setSent(true)}}><input required placeholder={t.name}/><input required placeholder={t.email}/><textarea required placeholder={t.message}></textarea><button className="btn primary">{t.send} <b>→</b></button></form>{sent&&<p className="success">{t.success}</p>}</div><div className="contactVisual"><div className="emailBubble"><strong>Emil Čunderlík</strong><a href="mailto:emil.cunderlik@gmail.com">✉ emil.cunderlik@gmail.com</a></div><div className="seeYou">{t.seeYou}</div><img src="/images/cunderlik-gallery/%C4%8Cunderl%C3%ADk6.png" alt="Emil Čunderlík na červenom motocykli Jawa"/><div className="trackSigns">{t.sign.map(x=><span key={x}>{x}</span>)}</div></div></div></section></main><footer><span>{t.footer}</span><span>© {new Date().getFullYear()} Cunderlik MX</span></footer></>}
 createRoot(document.getElementById("root")).render(<App/>);
